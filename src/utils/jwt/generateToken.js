@@ -1,16 +1,13 @@
 import jwt from "jsonwebtoken";
 import config from "../../config/config.js";
 
-const generateUserTokens = (
-    res,
-    payload
-) => {
+const generateUserTokens = (res, payload) => {
     const accessToken = jwt.sign(
         { userId: payload.userId },
-        config.JWT_SECRET ,
+        config.JWT_SECRET,
         {
             expiresIn: "1h",
-        } 
+        }
     );
 
     const refreshToken = jwt.sign(
@@ -18,7 +15,7 @@ const generateUserTokens = (
         config.JWT_SECRET,
         {
             expiresIn: "30d",
-        } 
+        }
     );
 
     const cookieName = "userrefreshToken";

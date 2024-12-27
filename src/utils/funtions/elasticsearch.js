@@ -1,7 +1,6 @@
 import { Client } from '@elastic/elasticsearch';
 import config from '../../config/config.js';
 
-console.log(config.USER_NAME)
 const client = new Client({
   cloud: {
     id: config.CLOUD_ID,

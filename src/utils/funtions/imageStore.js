@@ -49,9 +49,8 @@
 // export default upload;
 // export { s3Client };
 
-
 import multer from "multer";
-import path from 'path';
+import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -60,14 +59,13 @@ const uploadPath = path.resolve(__dirname, "../../../../client/public/books");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        console.log("Uploading to:", uploadPath); 
-        cb(null, uploadPath); 
+        cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
         const originalname = file.originalname;
-        const extname = path.extname(originalname); 
-        const basename = path.basename(originalname, extname); 
-        const filename = `${Date.now()}-${basename}${extname}`; 
+        const extname = path.extname(originalname);
+        const basename = path.basename(originalname, extname);
+        const filename = `${Date.now()}-${basename}${extname}`;
         cb(null, filename);
     },
 });
@@ -75,4 +73,3 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 export default upload;
-

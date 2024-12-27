@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import morgan from 'morgan';
+import morgan from "morgan";
 import cors from "cors";
 import dbConnect from "./config/db.js";
 import userRoutes from "./routes/userRoute.js";
@@ -10,20 +10,21 @@ import client from "./utils/funtions/elasticsearch.js";
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 };
 
 dbConnect();
 
-app.use(express.json());    
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 app.use(express.static("public/"));
 
 app.use(cors(corsOptions));
+
 app.use("/api/user", userRoutes);
 
 app.listen(config.PORT, () => {

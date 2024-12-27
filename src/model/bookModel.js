@@ -13,10 +13,10 @@ const bookSchema = new mongoose.Schema(
         },
         image: { type: String },
         isbn: {
-            type: String,
+            type: Number,
         },
         publishedYear: {
-            type: String,
+            type: Number,
         },
     },
     { timestamps: true }

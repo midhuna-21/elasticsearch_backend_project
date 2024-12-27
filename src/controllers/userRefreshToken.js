@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { generateUserTokens } from "../utils/jwt/generateToken.js";
 import config from "../config/config.js";
+import { user } from "../model/userModel.js";
 
 const userRefreshToken = async (req, res) => {
     try {
@@ -13,10 +14,7 @@ const userRefreshToken = async (req, res) => {
         }
         let decoded;
         try {
-            decoded = jwt.verify(
-                cookieToken,
-                config.JWT_SECRET
-            ) 
+            decoded = jwt.verify(cookieToken, config.JWT_SECRET);
         } catch (err) {
             console.error("Token verification error", err);
             return res.status(401).json({ message: "Invalid token" });
@@ -26,14 +24,13 @@ const userRefreshToken = async (req, res) => {
             return res.status(401).json({ message: "Invalid token" });
         }
 
-        let user = await userService.getUserById(decoded.userId);
+        let userData = await user.findById({ _id: decoded.userId });
 
-        if (!user) {
+        if (!userData) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        const userId = (user._id).toString();
-        console.log(userId,'userid refresh token')
+        const userId = userData._id;
         const tokens = generateUserTokens(res, { userId });
         return res.status(200).json({
             accessToken: tokens.accessToken,
