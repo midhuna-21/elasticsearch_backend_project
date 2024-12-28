@@ -10,7 +10,7 @@ import client from "./utils/funtions/elasticsearch.js";
 const app = express();
 
 const corsOptions = {
-    origin: "https://elasticsearch-frontend-project-nkxb.vercel.app",
+    origin: "https://elasticsearch-frontend-project-nkxb.vercel.app/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 };
