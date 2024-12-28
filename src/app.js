@@ -28,7 +28,7 @@ app.use(express.static("public/"));
 
 app.use(cors(corsOptions));
 
-app.use("/api/user", userRoutes);
+app.use("/", userRoutes);
 
 app.listen(config.PORT, () => {
     console.log(`Server running at ${config.PORT}`);
