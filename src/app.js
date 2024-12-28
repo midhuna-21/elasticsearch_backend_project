@@ -11,12 +11,11 @@ const app = express();
 
 
 console.log(config.API,'api frontend ')
-app.use(cors({
-    origin: '*',  
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+const corsOptions = {
+    origin: config.API,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  }));
-  
+};
 
 dbConnect();
 
