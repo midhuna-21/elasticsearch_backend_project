@@ -11,11 +11,12 @@ const app = express();
 
 
 console.log(config.API,'api frontend ')
-const corsOptions = {
-    origin: config.API,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+app.use(cors({
+    origin: '*',  
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-};
+  }));
+  
 
 dbConnect();
 
@@ -27,10 +28,6 @@ app.use(express.static("public/"));
 
 app.use(cors(corsOptions));
 
-
-app.get('/',()=>{
-    console.log('helo is it workign')
-})
 app.use("/api/user", userRoutes);
 
 app.listen(config.PORT, () => {
