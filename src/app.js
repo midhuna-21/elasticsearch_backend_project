@@ -9,24 +9,22 @@ import client from "./utils/funtions/elasticsearch.js";
 
 const app = express();
 
-
 console.log(config.API,'api frontend ')
 const corsOptions = {
     origin: config.API,
-    methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Credentials'],
 };
 
 dbConnect();
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.static("public/"));
 
-app.use(cors(corsOptions));
 
 app.use("/", userRoutes);
 
