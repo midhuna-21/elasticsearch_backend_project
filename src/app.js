@@ -11,22 +11,12 @@ const app = express();
 
 
 console.log(config.API,'api frontend ')
-const whitelist = [config.API]; 
-
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: config.API,
+    methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization','Credentials'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Credentials'],
 };
-
-app.use(cors(corsOptions));
 
 dbConnect();
 
