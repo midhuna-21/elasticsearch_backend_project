@@ -9,6 +9,8 @@ import client from "./utils/funtions/elasticsearch.js";
 
 const app = express();
 
+
+console.log(config.API,'api frontend ')
 const corsOptions = {
     origin: config.API,
     methods: ["GET", "POST", "PUT", "DELETE"],
